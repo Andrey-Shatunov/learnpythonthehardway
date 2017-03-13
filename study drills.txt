@@ -1,0 +1,2 @@
+* Go read about nosetests more, and also read about alternatives.
+* Learn about Python's "doc tests" and see if you like them better.

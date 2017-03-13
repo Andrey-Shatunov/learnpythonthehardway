@@ -30,3 +30,14 @@ def test_map():
     assert_equal(start.go('west'), west)
     assert_equal(start.go('west').go('east'), start)
     assert_equal(start.go('down').go('up'), start)
+	
+def test_rename():
+	my_room = Room("Start", "You can go west and down a hole.")
+	my_room.rename_room("New name")
+	assert_equal(my_room.name, "New name")
+	
+def test_direction():
+	my_room = Room("Start", "You can go west and down a hole.")
+	my_room.rename_direction("New direction")
+	assert_equal(my_room.direction, "New direction")
+		

@@ -10,3 +10,9 @@ class Room(object):
 
     def add_paths(self, paths):
         self.paths.update(paths)
+		
+    def rename_room(self,new_name):
+	self.name=new_name
+	
+    def rename_direction(self,new_direction):
+        self.direction=new_direction
