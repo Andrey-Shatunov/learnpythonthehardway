@@ -1,5 +1,3 @@
-def ololo():
-    print "asd"
 class ParserError(Exception):
     pass
 
@@ -37,54 +35,49 @@ def skip(word_list, word_type):
     while peek(word_list) == word_type:
         match(word_list, word_type)
 
-def parse_verb(word_list):
-    skip(word_list, 'stop')
+class Parser(object):
+    def parse_verb(self,word_list):
+        skip(word_list, 'stop')
 
-    if peek(word_list) == 'verb':
-        return match(word_list, 'verb')
-    else:
-        raise ParserError("Expected a verb next.")
-    
-def parse_subject(word_list):
-    Sentence().skip(word_list, 'stop')
-    next_word = peek(word_list)
+        if peek(word_list) == 'verb':
+            return match(word_list, 'verb')
+        else:
+            raise ParserError("Expected a verb next.")
 
-    if next_word == 'noun':
-        return match(word_list, 'noun')
-    elif next_word == 'verb':
-        return ('noun', 'player')
-    else:
-        raise ParserError("Expected a verb next.")
 
-def parse_object(word_list):
-    skip(word_list, 'stop')
-    next_word = peek(word_list)
+    def parse_object(self,word_list):
+        skip(word_list, 'stop')
+        next_word = peek(word_list)
 
-    if next_word == 'noun':
-        return match(word_list, 'noun')
-    elif next_word == 'direction':
-        return match(word_list, 'direction')
-    else:
-        raise ParserError("Expected a noun or direction next.")
+        if next_word == 'noun':
+            return match(word_list, 'noun')
+        elif next_word == 'direction':
+            return match(word_list, 'direction')
+        else:
+            raise ParserError("Expected a noun or direction next.")
 
-def parse_subject(word_list):
-    skip(word_list, 'stop')
-    next_word = peek(word_list)
+    def parse_subject(self,word_list):
+        skip(word_list, 'stop')
+        next_word = peek(word_list)
 
-    if next_word == 'noun':
-        return match(word_list, 'noun')
-    elif next_word == 'verb':
-        return ('noun', 'player')
-    else:
-        raise ParserError("Expected a verb next.")
+        if next_word == 'noun':
+            return match(word_list, 'noun')
+        elif next_word == 'verb':
+            return ('noun', 'player')
+        else:
+            raise ParserError("Expected a verb next.")
 
-def parse_sentence(word_list):
-    subj = parse_subject(word_list)
-    verb = parse_verb(word_list)
-    obj = parse_object(word_list)
+    def parse_sentence(self,word_list):
+        print word_list
+        subj = self.parse_subject(word_list)
+        print subj
+        verb = self.parse_verb(word_list)
+        print verb
+        obj = self.parse_object(word_list)
+        print obj
 
-    return Sentence(subj, verb, obj)
+        return Sentence(subj, verb, obj)
 
-x = parse_sentence([('verb','run'), ('direction','north')])
-
+x = Parser().parse_sentence([('stop','run'),('verb','run'), ('direction','north')])
+print x.subject
 print "ololo"
